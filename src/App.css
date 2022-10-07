@@ -5,6 +5,24 @@
   text-align: center;
 }
 
+.headerx {
+  text-align: center;
+  padding: 20px 0;
+  word-spacing: 20px;
+}
+
+.tasks span, .tasks a {
+  margin: 10px 25px;
+}
+
+.tasks a {
+  cursor: pointer;
+}
+
+.tasks a:hover {
+  color:#ff0;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
