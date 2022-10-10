@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 const Todo = () => {
   let [newTask, setNewTask] = useState("");
   let [doneTask, setDoneTask] = useState(0);
-  let [allTasks, setAllTasks] = useState([{ id: 1, task: "Tasker 1", status: 0 }]);
+  let [allTasks, setAllTasks] = useState([
+    { id: 1, task: "Tasker 1", status: 0 },
+    { id: 2, task: "Tasker 1", status: 0 },
+  ]);
+  let [deleteTask, setDeleteTask] = useState(2);
   // Statuses - 0: Open, 1: Done, 2: Deleted
 
   useEffect(() => {
@@ -37,6 +41,28 @@ const Todo = () => {
     setAllTasks([...allTasks]);
   }
 
+  function handleDelete(id) {
+    console.log("task id", id);
+
+    // Find in allTask by id, get the first element in the array (starting form 0)
+    let task = allTasks.filter((t) => t.id == id)[0];
+
+    // // change the status
+    task.status = 2; //ternary operator
+    allTasks[id - 1] = task;
+    //updating the arrays
+
+    // // update setAllStatus
+    setAllTasks([...allTasks]);
+  }
+  function test() {
+    console.log("i am robot");
+  }
+
+  const testa = () => console.log("iam tester");
+  // testa();
+  // test();
+
   return (
     <>
       <h1>Todo Page</h1>
@@ -62,11 +88,11 @@ const Todo = () => {
           ""
         )}
         {allTasks.length
-          ? allTasks.map((d) => (
-              <div className="tasks" key={d.id}>
-                <input type="checkbox" onChange={(e) => handleCheck(d.id, e.target.checked)} />
-                <span>{d.task}</span>
-                <a>&times;</a>
+          ? allTasks.map((task) => (
+              <div className="tasks" key={task.id}>
+                <input type="checkbox" onChange={(e) => handleCheck(task.id, e.target.checked)} />
+                <span>{task.status == 2 ? <s>{task.task}</s> : task.task}</span>
+                <a onClick={() => handleDelete(task.id)}> &times;</a>
               </div>
             ))
           : ""}
