@@ -1,5 +1,4 @@
 import { Link, Route, Routes } from "react-router-dom";
-import "./App.css";
 
 import About from "./pages/About";
 import Index from "./pages/Index";

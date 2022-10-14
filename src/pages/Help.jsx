@@ -1,76 +1,80 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { useState } from "react";
 
 function Help() {
-  const faq = [
-    { id: 1, question: "This is the answer to your question1", ans: "Answer1" },
-    { id: 2, question: "This is the answer to another question2", ans: "Answer2" },
-    { id: 3, question: "This is the answer to the third question3", ans: "Answer3" },
-  ];
-  let abc = [
-    [
-      ["id", 1],
-      ["quest", "what is water?"],
-      ["ans", "it is a liquid"],
-    ],
-    [
-      ["id", 2],
-      ["quest", "what is water?"],
-      ["ans", "it is a liquid"],
-    ],
-    [
-      ["id", 3],
-      ["quest", "what is water?"],
-      ["ans", "it is a liquid"],
-    ],
-  ];
+  const [faq, setFaq] = useState([
+    { id: 1, question: "This is question 1", ans: "The Answer to Q1" },
+    { id: 2, question: "This is question 2", ans: "The Answer to Q2" },
+    { id: 3, question: "This is question 3", ans: "The Answer to Q3" },
+  ]);
+
+  const [que, setQue] = useState("");
+  const [ans, setAns] = useState("");
+
+  function submit() {
+    let id = faq.length + 1;
+    let newObj = {
+      id: id,
+      question: que,
+      ans: ans,
+    };
+    faq[id - 1] = newObj;
+    setFaq([...faq]);
+    setQue("");
+    setAns("");
+  }
+
+  // let abc = [
+  //   [
+  //     ["id", 1],
+  //     ["quest", "what is water?"],
+  //     ["ans", "it is a liquid"],
+  //   ],
+  //   [
+  //     ["id", 2],
+  //     ["quest", "what is water?"],
+  //     ["ans", "it is a liquid"],
+  //   ],
+  //   [
+  //     ["id", 3],
+  //     ["quest", "what is water?"],
+  //     ["ans", "it is a liquid"],
+  //   ],
+  // ];
 
   return (
     <>
       <h1>Help Page</h1>
       {faq.map((f) => (
-        <div key={f.id}>
-          <div>{f.question}</div>
-          <h1>{f.ans}</h1>
+        <div key={f.id} className="qa-section">
+          <div className="font-bold text-xl mb-2 pb-2 border-b border-white border-opacity-20">{f.question}</div>
+          <h3>{f.ans}</h3>
         </div>
       ))}
-      {abc.map((a) => (
+
+      <div className="qa-section">
+        <div className=" mb-2 pb-2 border-b border-white border-opacity-20">
+          <input type="text" value={que} placeholder="Question" className="px-3" onChange={(e) => setQue(e.target.value)} />
+        </div>
+        <div>
+          <input type="text" value={ans} placeholder="Answer" className="px-3" onChange={(e) => setAns(e.target.value)} />
+          <br />
+          <a onClick={submit} className="inline-block bg-purple-600 text-white mt-3 rounded-md py-1.5 px-6 hover:bg-black hover:text-white cursor-pointer">
+            Add FAQ
+          </a>
+        </div>
+      </div>
+
+      {/* {abc.map((a) => (
         <div key={a[0][1]}>
           <div>{a[1][1]}</div>
           <h1>{a[2][1]}</h1>
         </div>
-      ))}
+      ))} */}
     </>
   );
 }
 
 export default Help;
-
-// function Faq(props) {
-//   return (
-//     <h5>
-//       <li>I am a {props.question1}</li>
-//     </h5>
-//   );
-// }
-
-// function Answer() {
-//   const faq = [
-//     { id: 1, question1: "This is the answer to your question1" },
-//     { id: 2, question2: "This is the answer to another question2" },
-//     { id: 3, question3: "This is the answer to the third question3" },
-//   ];
-//   return (
-//     <>
-//       <h1>FAQ</h1>
-//       <ul>
-//         {faq.map((faq) => (
-//           <Faq key={faq.id} question1={faq.question1} />
-//         ))}
-//       </ul>
-//     </>
-//   );
-// }
 
 // Assignment
 // Create and loop through help informnation
