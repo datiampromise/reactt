@@ -2,9 +2,9 @@ import { useState } from "react";
 
 function Help() {
   const [faq, setFaq] = useState([
-    { id: 1, question: "This is question 1", ans: "The Answer to Q1" },
-    { id: 2, question: "This is question 2", ans: "The Answer to Q2" },
-    { id: 3, question: "This is question 3", ans: "The Answer to Q3" },
+    { id: 1, question: "This is question 1", ans: "The Answer to Q1", show: false },
+    { id: 2, question: "This is question 2", ans: "The Answer to Q2", show: false },
+    { id: 3, question: "This is question 3", ans: "The Answer to Q3", show: false },
   ]);
 
   const [que, setQue] = useState("");
@@ -18,10 +18,38 @@ function Help() {
       ans: ans,
     };
     faq[id - 1] = newObj;
-    setFaq([...faq]);
+    setFaq([...faq]); // spread operation
     setQue("");
     setAns("");
   }
+
+  let show = (id) => {
+    // let ff = faq.filter((f) => f.id == id)[0];
+    // ff.show = !ff.show;
+
+    // let fff = faq.map((f) => {
+    //   if (f.id == id) {
+    //     f.show = !f.show;
+    //   }
+    //   f.id == id ? (f.show = !f.show) : "";
+    //   return f;
+    // });
+
+    // let f = { id: 1, show: true };
+    // let f1 = f;
+    // let f2 = { ...f, show: false };
+    // f.id = 7;
+
+    // console.log("F1", f1);
+    // console.log("F2", f2);
+
+    let ff = faq.map((f) => (f.id == id ? { ...f, show: !f.show } : f));
+    // console.log("FF", ff);
+
+    setFaq(ff);
+  };
+
+  // let showOneLiner = (id) => setFaq(faq.map((f) => (f.id == id ? { ...f, show: !f.show } : f)));
 
   // let abc = [
   //   [
@@ -46,13 +74,15 @@ function Help() {
       <h1>Help Page</h1>
       {faq.map((f) => (
         <div key={f.id} className="qa-section">
-          <div className="font-bold text-xl mb-2 pb-2 border-b border-white border-opacity-20">{f.question}</div>
-          <h3>{f.ans}</h3>
+          <div className="font-bold text-xl pt-4 pb-4 cursor-pointer" onClick={() => show(f.id)}>
+            {f.question}
+          </div>
+          <h3 className={"py-4 border-t border-white border-opacity-20 " + (f.show ? "" : "hidden")}>{f.ans}</h3>
         </div>
       ))}
 
       <div className="qa-section">
-        <div className=" mb-2 pb-2 border-b border-white border-opacity-20">
+        <div className=" mb-2 py-4 border-b border-white border-opacity-20">
           <input type="text" value={que} placeholder="Question" className="px-3" onChange={(e) => setQue(e.target.value)} />
         </div>
         <div>

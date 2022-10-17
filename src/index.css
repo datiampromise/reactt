@@ -93,8 +93,13 @@ h1 {
 }
 
 .qa-section {
-  @apply my-6 py-4 border border-white border-opacity-20 rounded-md;
+  @apply my-6 border border-white border-opacity-20 rounded-md;
+  
 }
 
+.qa-section div {
+  -webkit-user-select: none;
+  user-select: none; 
+}
 
 
