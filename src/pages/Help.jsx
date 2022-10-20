@@ -44,9 +44,24 @@ function Help() {
     // console.log("F2", f2);
 
     let ff = faq.map((f) => (f.id == id ? { ...f, show: !f.show } : f));
-    // console.log("FF", ff);
+    console.log("FF", ff);
 
     setFaq(ff);
+  };
+
+  function hello(name) {
+    console.log("hello " + name);
+    // alert("hello " + name);
+  }
+
+  function abc() {
+    console.log("This is abc");
+  }
+
+  const xyz = (x) => {
+    // console.log();
+    abc();
+    hello(x);
   };
 
   // let showOneLiner = (id) => setFaq(faq.map((f) => (f.id == id ? { ...f, show: !f.show } : f)));
@@ -72,14 +87,31 @@ function Help() {
   return (
     <>
       <h1>Welcome To The Help Page</h1>
+      <div className="py-20">
+        <div>
+          <a onClick={() => hello("IamPromise")}>call hello fn</a>
+          <a onClick={() => hello("STEVEN")}>call hello fn</a>
+        </div>
+        <div>
+          <a onClick={() => abc()}>call abc fn</a>
+        </div>
+        <div>
+          <a onClick={() => xyz("something that you like")}>call xyz fn</a>
+        </div>
+      </div>
       {faq.map((f) => (
         <div key={f.id} className="qa-section">
           <div className="font-bold text-xl flex justify-between items-center px-3 py-3 mb-2 pt-4 pb-4 cursor-pointer" onClick={() => show(f.id)}>
             {f.question}
             <a className="button px-4 py-1 bg-transparent inline-block " onClick={() => show(f.id)}>
-              +
+              {f.show ? "+" : "-"}
             </a>
+            {/* <a className="button px-4 py-1 bg-transparent inline-block " onClick={() => show(f.id)}>
+              <b className={f.show && "hidden"}>+</b>
+              <b className={!f.show && "hidden"}>-</b>
+            </a> */}
           </div>
+
           <h3 className={"py-4 border-t border-white border-opacity-20 " + (f.show ? "" : "hidden")}>{f.ans}</h3>
         </div>
       ))}

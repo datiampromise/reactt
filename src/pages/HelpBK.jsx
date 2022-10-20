@@ -71,7 +71,7 @@ function Help() {
 
   return (
     <>
-      <h1>Help Page</h1>
+      <h1>Welcome To The Help Page</h1>
       {faq.map((f) => (
         <div key={f.id} className="qa-section">
           <div className="font-bold text-xl pt-4 pb-4 cursor-pointer" onClick={() => show(f.id)}>
